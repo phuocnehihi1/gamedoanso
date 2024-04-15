@@ -18,12 +18,7 @@ public class gameService {
       LocalTime endTime = null;
       int iscomplete = createdGame.getIscomplete();
       String userName = createdGame.getUserName();
-
-        System.out.println(userName);
       int isActive = createdGame.getIsActive();
-        System.out.println(startTime);
-        System.out.println("End Time: " + endTime);
-//
         try {
             gameRepo.createGameR(GameID,targetGame,startTime, endTime, iscomplete,userName,isActive);
         } catch (SQLException e) {
