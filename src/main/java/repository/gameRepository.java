@@ -5,6 +5,7 @@ import jdbc.myConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.sql.Timestamp;
 
@@ -12,7 +13,7 @@ public class gameRepository {
 
 
 
-    public void createGameR(String GameID, int targetGame, LocalTime startTime, LocalTime endTime,int iscomplete, String userName, int isActive ) throws SQLException {
+    public void createGameR(String GameID, int targetGame, LocalDateTime startTime, LocalDateTime endTime, int iscomplete, String userName, int isActive ) throws SQLException {
 
         System.out.println(GameID);/*1*/
         System.out.println(targetGame);/*2*/
@@ -32,12 +33,12 @@ public class gameRepository {
         try{
             ps.setString(1, GameID);
             ps.setInt(2, targetGame);
-            ps.setTimestamp(3,LocalTime.now(startTime));
+            ps.setTimestamp(3, Timestamp.valueOf(startTime));
             ps.setObject(4, endTime);
             ps.setInt(5, iscomplete);
             ps.setString(6, userName);
             ps.setInt(7, isActive);
-            Timestamp timestamp = Timestamp.valueOf(now);
+
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {

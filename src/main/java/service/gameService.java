@@ -4,7 +4,8 @@ import model.Game;
 import repository.gameRepository;
 
 import java.sql.SQLException;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+
 
 public class gameService {
     gameRepository gameRepo = new gameRepository();
@@ -14,8 +15,8 @@ public class gameService {
         Game createdGame = new Game(game);
       String GameID = createdGame.getGameID();
       int targetGame = createdGame.getTagertGame();
-      LocalTime startTime = LocalTime.from(createdGame.getStartTime());
-      LocalTime endTime = null;
+      LocalDateTime startTime = LocalDateTime.from(createdGame.getStartTime());
+      LocalDateTime endTime = null;
       int iscomplete = createdGame.getIscomplete();
       String userName = createdGame.getUserName();
       int isActive = createdGame.getIsActive();
