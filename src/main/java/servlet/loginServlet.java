@@ -24,7 +24,7 @@ public class loginServlet extends HttpServlet {
         req.getRequestDispatcher(Jsputils.LOGIN).forward(req, resp);
     }
 
-    @Override
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
       if(Urlutils.LOGIN.equals(req.getServletPath())){
@@ -34,6 +34,7 @@ public class loginServlet extends HttpServlet {
             Player player = loginService.login(username, password);
 
             if(player != null){
+
                 req.getSession().setAttribute("loginuser", player);
                 resp.sendRedirect(req.getContextPath() + Urlutils.GAME);
 

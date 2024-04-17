@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.Player" %>
 <%@ page import="urls.Urlutils" %>
+<%@ page import="model.Game" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>Game page </title>
@@ -23,11 +25,12 @@
 
                 <div class="dropdown">
                     <a class="btn btn-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <%= ((Player) session.getAttribute("loginuser")).getUsername()%>
+                        <%= ((Player) session.getAttribute("loginuser")).getUsername()
+                        %>
                     </a>
 
                     <ul class="dropdown-menu bg-dark">
-                        <li><a class="dropdown-item text-light" href="<%= request.getContextPath() + Urlutils.LOGOUT%>">Log out</a></li>
+                        <li><a class="dropdown-item text-light" href="<%= request.getContextPath() + Urlutils.LOGOUT%><% Object Game; %>">Log out</a></li>
                     </ul>
 <%--                    <%= request.getContextPath() + utils.LOGOUT %>--%>
                 </div>
@@ -38,18 +41,21 @@
             <div class="container text-center">
             <div class="row justify-content-between">
                 <div class="col-2 text-start">
+                 <h4 >
 
-                    ID Game
+                     ${game.getGameID()}
+                 </h4>
                 </div>
                 <div class="col-4">
                     <h4 class="text-warning text-center">Be happy and not Boring </h4>
-                    <form>
+<%--                    "?username=" +((Player) session.getAttribute("loginuser")).getUsername()--%>
+                    <form action="<%= request.getContextPath() + Urlutils.GAME + "?username=" +((Player) session.getAttribute("loginuser")).getUsername() %>"  method="post">
                         <div class="mt-5 mb-3">
                             <label for="exampleInputEmail1" class="form-label">Enter Number: </label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input name="number-guess" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <div id="emailHelp" class="form-text">We are confident, We will win.</div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Guss</button>
                     </form>
 
                     <table class="table table-dark table-striped opacity-25  mt-5 mb-3">
@@ -84,7 +90,10 @@
                     </table>
                 </div>
                 <div class="col-2 text-end">
-                    <form action="<%= request.getContextPath() + Urlutils.NEW_GAME %>" method="post">
+
+                    <%-- action form New Game                    --%>
+                    <%--   "?username=" + ((Player) session.getAttribute("loginuser")).getUsername() dùng để nhận biết tao tác của người dùng gửi xuống phân thức             --%>
+                    <form action="<%= request.getContextPath() + Urlutils.NEW_GAME + "?username=" + ((Player) session.getAttribute("loginuser")).getUsername() %>"  method="post">
 
                         <button type="submit" class="btn btn-primary">New Game</button>
                     </form>
